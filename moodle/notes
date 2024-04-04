@@ -1,0 +1,50 @@
+$ sudo apt update
+
+sudo apt install -y mysql-client mysql-server apache2 php php-mysql php-mbstring php-xml  php-curl php-zip php-gd php-intl php-soap
+
+Goto moodel.org to doanload it
+
+ sudo wget https://download.moodle.org/download.php/direct/stable403/moodle-latest-403.tgz
+
+$ sudo mv moodle-latest-403.tgz /var/www/html/
+
+$ sudo tar -xf moodle-latest-403.tgz
+
+
+Now you can access the web to configure
+http://192.168.75.134/moodle
+
+Make a dir and change owner www-data is the default user for Apache server
+Cd /var/www
+Sudo mkdir moodledata
+
+Sudo chown www-data moodeldata
+
+Go to https://docs.moodle.org/403/en/Installation_quick_guide
+To setup the mysql database
+
+
+Add user to interact with the database
+
+From <https://docs.moodle.org/403/en/Installation_quick_guide> 
+
+$ sudo mysql
+Mysql>  CREATE DATABASE moodle DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+mysql> show databases;
+
+Mysql> CREATE USER 'moodleuser'@'localhost' IDENTIFIED BY 'moodle123!';
+
+Mysql>  GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,CREATE TEMPORARY TABLES,DROP,INDEX,ALTER ON moodle.* TO 'moodleuser'@'localhost';
+
+mysql> FLUSH PRIVILEGES;
+Mysql> quit
+
+Cd /var/www/html/moodle
+sudo chown www-data -R moodle/
+
+Increase max_input_vars to 5000
+sudo vi /etc/php/8.1/apache2/php.ini
+
+Restart apache server
+$ sudo systemctl restart apache2
