@@ -1,3 +1,6 @@
+
+http://ec2-3-89-191-96.compute-1.amazonaws.com/moodle
+
 $ sudo apt update
 
 sudo apt install -y mysql-client mysql-server apache2 php php-mysql php-mbstring php-xml  php-curl php-zip php-gd php-intl php-soap
